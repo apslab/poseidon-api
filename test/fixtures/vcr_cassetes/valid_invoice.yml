@@ -1,0 +1,108 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:3000/api/v1/tokens
+    body:
+      encoding: UTF-8
+      string: ! '{"email":"lmpetek@gmail.com","password":"123456"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0sg
+    headers:
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RXRhZw==":
+      - !binary |-
+        IjJhZjAzZDgwMmZiM2U1YTFiZWZkMmNkNWE4ZDY1MjM1Ig==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZQ==
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4zNDUwMTI=
+      !binary "U2VydmVy":
+      - !binary |-
+        V0VCcmljay8xLjMuMSAoUnVieS8xLjkuMy8yMDEyLTA0LTIwKQ==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U2F0LCAwMiBNYXIgMjAxMyAxMzoxMDo1MCBHTVQ=
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        MzI=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        S2VlcC1BbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ0b2tlbiI6InlOem81MUt1Zk12ZXRabmVvN2NEIn0=
+    http_version: 
+  recorded_at: Sat, 02 Mar 2013 13:10:50 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/api/v1/facturas.json?auth_token=yNzo51KufMvetZneo7cD
+    body:
+      encoding: UTF-8
+      string: ! '{"factura":{"fecha":"2013-03-02","sale_point":1,"numero":5428551,"cliente":{"razonsocial":"Los
+        alerces","cuit_number":20233119354,"condicioniva_id":1},"detalles":[{"cantidad":10,"preciounitario":15.5,"descripcion":"detalle","tasaiva":21.0},{"cantidad":8,"preciounitario":35.0,"descripcion":"detalle","tasaiva":21.0}]}}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: !binary |-
+        Q3JlYXRlZCA=
+    headers:
+      !binary "TG9jYXRpb24=":
+      - !binary |-
+        aHR0cDovL2xvY2FsaG9zdDozMDAwL2NsaWVudGVzLzE0L2ZhY3R1cmFzLzMy
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZQ==
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MS4yMDk1ODQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        V0VCcmljay8xLjMuMSAoUnVieS8xLjkuMy8yMDEyLTA0LTIwKQ==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U2F0LCAwMiBNYXIgMjAxMyAxMzoxMDo1MSBHTVQ=
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        MQ==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        S2VlcC1BbGl2ZQ==
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        X3Bvc2VpZG9uX3Nlc3Npb249QkFoN0Iwa2lHWGRoY21SbGJpNTFjMlZ5TG5W
+        elpYSXVhMlY1QmpvR1JWUmJDRWtpQ1ZWelpYSUdPd0JHV3dacEJra2lJaVF5
+        WVNReE1DUkNOMjVGTkZwTE1VOUljbk13V2xwT2JVeENaazVQQmpzQVZFa2lE
+        M05sYzNOcGIyNWZhV1FHT3dCR0lpVTNZalZpTUdOaU5HWmtNak16TXpJM09H
+        UXhPVGcyTXpGaE1UZzJZbUl4WWclM0QlM0QtLWM3MzA4OWM2MjMwMDAzNDFl
+        NzVlYWIyOWNlZmE0YzA0MWU0YTYzZjU7IHBhdGg9LzsgSHR0cE9ubHk=
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        IA==
+    http_version: 
+  recorded_at: Sat, 02 Mar 2013 13:10:51 GMT
+recorded_with: VCR 2.4.0

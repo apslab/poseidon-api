@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:3000/api/v1/tokens
+    body:
+      encoding: UTF-8
+      string: ! '{"email":"lmpetek@gmail.com","password":""}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 401
+      message: !binary |-
+        VW5hdXRob3JpemVkIA==
+    headers:
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZQ==
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC40MjU4NDI=
+      !binary "U2VydmVy":
+      - !binary |-
+        V0VCcmljay8xLjMuMSAoUnVieS8xLjkuMy8yMDEyLTA0LTIwKQ==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U2F0LCAwMiBNYXIgMjAxMyAxMzoxMjoxMSBHTVQ=
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NDM=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        S2VlcC1BbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlcnJvciI6IkVtYWlsIG8gcGFzc3dvcmQgaW52XHUwMGUxbGlkb3MifQ==
+    http_version: 
+  recorded_at: Sat, 02 Mar 2013 13:12:11 GMT
+recorded_with: VCR 2.4.0
