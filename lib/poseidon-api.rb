@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "poseidon-api/version"
 require 'json'
 require 'curb'
