@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["maxidr@gmail.com"]
   gem.description   = %q{An API to interact with the Poseidon system}
   gem.summary       = %q{API client for Poseidon system}
-  gem.homepage      = "https://github.com/maxidr/poseidon-api"
+  gem.homepage      = "https://github.com/apslab/poseidon-api"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
