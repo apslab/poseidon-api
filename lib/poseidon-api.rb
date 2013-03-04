@@ -2,21 +2,41 @@ require "poseidon-api/version"
 require 'json'
 require 'curb'
 
+# Cliente para interactuar con la API del sistema poseidon.
+#
+# Ejemplo:
+#
+#     api = Poseidon::API(url: 'http://poseidon-url.com', user: 'user@test.com', password: '12345')
+#     invoice = Poseidon::Invoice.new ...
+#     ...
+#     emitted = api.emit_invoice(invoice)
+#
+# Retorna un booleano que indica si pudo o no emitir la factura.
+#
+# En caso de no emitir la factura se pueden verificar los errores utilizando el método 'errors'
+#
 module Poseidon
   class API
 
     attr_reader :token, :errors  
 
+    # El constructor requiere los atributos:
+    # 
+    # + url: URL de la aplicación Poseidon.
+    # + user: Identificador del usuario poseidon que ingresa (email).
+    # + password: Contraseña de acceso.
+    # + version: Versión de la API a utilizar.
+    #
     def initialize(properties)
       @service_url = properties[:url]
-      @user_email = properties[:email]
-      @user_password = properties[:password]
+      @user = properties[:user]
+      @password = properties[:password]
       @errors = []
       @version = properties[:version] || 'v1'
     end
 
     def login
-      json = { :email => @user_email, :password => @user_password }.to_json
+      json = { :email => @user, :password => @password }.to_json
       curl = post(token_uri, json)
       if curl.response_code == 200
         response = JSON.parse(curl.body_str)

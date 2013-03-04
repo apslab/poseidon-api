@@ -1,24 +1,32 @@
 # Poseidon::Api
 
-TODO: Write a gem description
+Cliente para interactuar con la API del sistema Poseidon.
 
-## Installation
+## Instalación
 
-Add this line to your application's Gemfile:
+Agregar la siguiente linea a su Gemfile:
 
     gem 'poseidon-api'
 
-And then execute:
+Y luego ejecutar:
 
     $ bundle
 
-Or install it yourself as:
+O instalar directamente: 
 
     $ gem install poseidon-api
 
-## Usage
+## Modo de uso
 
-TODO: Write usage instructions here
+    api = Poseidon::API(url: 'http://poseidon-url.com', user: 'user@test.com', password: '12345')
+    invoice = Poseidon::Invoice.new ...
+    ...
+    emitted = api.emit_invoice(invoice)
+
+Retorna un booleano que indica si pudo o no emitir la factura.
+
+En caso de no emitir la factura se pueden verificar los errores utilizando el método 'errors'
+
 
 ## Contributing
 

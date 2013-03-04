@@ -9,7 +9,7 @@ end
 
 
 def valid_properties
-  { :email => 'lmpetek@gmail.com', :password => '123456', url: 'http://localhost:3000' }
+  { :user => 'lmpetek@gmail.com', :password => '123456', url: 'http://localhost:3000' }
 end
 
 def login
