@@ -18,7 +18,11 @@ require 'curb'
 module Poseidon
   class API
 
-    attr_reader :token, :errors  
+    attr_reader :token 
+
+    # Retorna los errores si falló la invocación de alguno de los 
+    # métodos.
+    attr_reader :errors  
 
     # El constructor requiere los atributos:
     # 
@@ -35,6 +39,11 @@ module Poseidon
       @version = properties[:version] || 'v1'
     end
 
+    # Obtiene un token para poder utilizar los servicios
+    # 
+    # Retorna true o false
+    #
+    # Si ocurre un error se pueden obtener los detalles a través del método "errors"
     def login
       json = { :email => @user, :password => @password }.to_json
       curl = post(token_uri, json)
@@ -49,6 +58,10 @@ module Poseidon
       end    
     end
 
+    # Emite una factura a través del sistema Poseidon
+    #
+    # Retorna true o false
+    #
     def emit_invoice(invoice)
       login if @token.nil? 
       curl = post(facturas_uri, invoice.to_json)
@@ -62,10 +75,6 @@ module Poseidon
         @errors.clear << response['error']
         return false
       end
-    end
-
-    def hello
-      'world'
     end
 
     private 
@@ -93,9 +102,17 @@ module Poseidon
   end
 
 
+  # Información de la factura a emitir
   class Invoice
     attr_accessor :date, :sale_point, :number, :client, :details
 
+    # Atributos para construir:
+    #
+    # + date
+    # + sale_point
+    # + number
+    # + client: a Poseidon::Client instance
+    #
     def initialize(attrs)
       @date = attrs[:date] || Date.now
       @sale_point = attrs[:sale_point]
@@ -123,6 +140,12 @@ module Poseidon
   class Client
     attr_accessor :name, :cuit, :iva_condition_id
 
+    # Atributos necesario para la construcción:
+    #
+    # + name
+    # + cuit
+    # + iva_condition_id
+    #
     def initialize(attrs)
       @name = attrs[:name]
       @cuit = attrs[:cuit]
@@ -137,6 +160,13 @@ module Poseidon
   class Detail
     attr_accessor :amount, :unit_price, :description, :iva_rate
 
+    # Attributos necesarios para la construcción:
+    #
+    #   + amount
+    #   + unit_price
+    #   + description
+    #   + iva_rate
+    #
     def initialize(attrs)
       @amount = attrs[:amount]
       @unit_price = attrs[:unit_price]

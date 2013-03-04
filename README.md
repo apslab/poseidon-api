@@ -19,8 +19,10 @@ O instalar directamente:
 ## Modo de uso
 
     api = Poseidon::API(url: 'http://poseidon-url.com', user: 'user@test.com', password: '12345')
-    invoice = Poseidon::Invoice.new ...
-    ...
+    invoice = Poseidon::Invoice.new(date: Date.today, sale_point: 1, number: 189122)
+    invoice.client = Poseidon::Client.new(name: 'Los alamos', cuit: 20243234221, iva_condition_id: 1)
+    invoice.details << Poseidon::Detail.new(amount: 10, unit_price: 15.50, description: 'Carpetas oficio', iva_rate: 21.0)
+    invoice.details << Poseidon::Detail.new(amount: 4, unit_price: 35.0, description: 'Carpetas plastificada', iva_rate: 21.0)
     emitted = api.emit_invoice(invoice)
 
 Retorna un booleano que indica si pudo o no emitir la factura.
