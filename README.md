@@ -2,6 +2,8 @@
 
 Cliente para interactuar con la API del sistema Poseidon.
 
+RDoc: http://rubydoc.info/github/apslab/poseidon-api/master/frames
+
 ## Instalación
 
 Agregar la siguiente linea a su Gemfile:
@@ -28,7 +30,6 @@ O instalar directamente:
 Retorna un booleano que indica si pudo o no emitir la factura.
 
 En caso de no emitir la factura se pueden verificar los errores utilizando el método 'errors'
-
 
 ## Contributing
 
