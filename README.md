@@ -1,3 +1,5 @@
+[![Build Status](http://www.apslabs.com.ar/jenkins/job/poseidon-api/badge/icon)](http://www.apslabs.com.ar/jenkins/job/poseidon-api/)
+
 # Poseidon::Api
 
 Cliente para interactuar con la API del sistema Poseidon.
@@ -30,6 +32,11 @@ O instalar directamente:
 Retorna un booleano que indica si pudo o no emitir la factura.
 
 En caso de no emitir la factura se pueden verificar los errores utilizando el método 'errors'
+
+## Links
+
+RDoc: http://rubydoc.info/github/apslab/poseidon-api/master/frames
+Source: https://github.com/apslab/poseidon-api
 
 ## Contributing
 
