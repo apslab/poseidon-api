@@ -1,4 +1,6 @@
-[![Build Status](http://www.apslabs.com.ar/jenkins/job/poseidon-api/badge/icon)](http://www.apslabs.com.ar/jenkins/job/poseidon-api/)
+[![Jenkins Build Status](http://www.apslabs.com.ar/jenkins/job/poseidon-api/badge/icon)](http://www.apslabs.com.ar/jenkins/job/poseidon-api/)
+[![Travis Build Status](https://travis-ci.org/apslab/poseidon-api.png)](https://travis-ci.org/apslab/poseidon-api)
+
 
 # Poseidon::Api
 
@@ -20,6 +22,9 @@ O instalar directamente:
 
 ## Modo de uso
 
+
+### Factura para clientes
+
 ```ruby
 api = Poseidon::API(url: 'http://poseidon-url.com', user: 'user@test.com', password: '12345')
 invoice = Poseidon::Invoice.new(date: Date.today, sale_point: 1, number: 189122)
@@ -32,6 +37,17 @@ emitted = api.emit_invoice(invoice)
 Retorna un booleano que indica si pudo o no emitir la factura.
 
 En caso de no emitir la factura se pueden verificar los errores utilizando el método 'errors'
+
+### Factura de proveedores
+
+```ruby
+api = Poseidon::API(url: 'http://poseidon-url.com', user: 'user@test.com', password: '12345')
+invoice = Poseidon::Invoice.new(date: Date.today, sale_point: 1, number: 189122)
+invoice.supplier = Poseidon::Supplier.new(name: 'Los alamos', cuit: 20243234221, iva_condition_id: 1)
+invoice.details << Poseidon::Detail.new(amount: 10, unit_price: 15.50, description: 'Carpetas oficio', iva_rate: 21.0)
+invoice.details << Poseidon::Detail.new(amount: 4, unit_price: 35.0, description: 'Carpetas plastificada', iva_rate: 21.0)
+emitted = api.emit_invoice(invoice)
+```
 
 ## Links
 
