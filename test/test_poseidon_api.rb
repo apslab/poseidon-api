@@ -18,9 +18,16 @@ def login
   api
 end
 
-def generate_invoice
+def generate_invoice(type)
   invoice = Poseidon::Invoice.new(date: Date.today, sale_point: 1, number: Random.rand(1..9999999))
-  invoice.client = Poseidon::Client.new(name: 'Los alerces', cuit: 20233119354, iva_condition_id: 1)
+  if type == :client 
+    invoice.client = Poseidon::Client.new(name: 'Los alerces', cuit: 20233119354, iva_condition_id: 1)
+  end
+
+  if type == :supplier
+    invoice.supplier = Poseidon::Supplier.new(name: 'Los alerces', cuit: 20233119354, iva_condition_id: 1)
+  end
+  
   [ { amount: 10, unit_price: 15.50, description: 'detalle', iva_rate: 21.0 },
     { amount: 8, unit_price: 35.0, description: 'detalle', iva_rate: 21.0 } ].each do |params|
     invoice.details << Poseidon::Detail.new(params)
@@ -48,13 +55,23 @@ Protest.describe('api') do
     end
   end
 
-  test 'emit invoice successul' do
-    VCR.use_cassette('valid_invoice') do 
+  test 'emit invoice for client successful' do
+    VCR.use_cassette('valid_client_invoice') do 
       api = Poseidon::API.new(valid_properties)
-      result = api.emit_invoice(generate_invoice)
-      assert result   
+      result = api.emit_invoice(generate_invoice(:client))
+      puts api.errors
+      assert result, api.errors  
       assert api.errors.empty?
     end
   end
   
+  test 'emit invoice for supplier successful' do
+    VCR.use_cassette('valid_supplier_invoice') do 
+      api = Poseidon::API.new(valid_properties)
+      result = api.emit_invoice(generate_invoice(:supplier))
+      assert result   
+      assert api.errors.empty?
+    end
+  end
+
 end

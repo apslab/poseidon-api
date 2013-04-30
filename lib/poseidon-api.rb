@@ -16,6 +16,19 @@ require 'curb'
 #
 # En caso de no emitir la factura se pueden verificar los errores utilizando el método 'errors'
 #
+# ## Factura de proveedores
+#
+# En caso de querer registrar la factura de un proveedor se procede a cargar el método supplier de invoice.
+#
+# Ejemplo:
+#
+#     api = ....
+#     invoice = Poseidon::Invoice.new ...
+#     invoice.supplier = Poseidon::Supplier.new(name: ....
+#     ...
+#     ...
+#     emitted = api.emit_invoice(invoice)
+#
 module Poseidon
   class API
 
@@ -105,7 +118,7 @@ module Poseidon
 
   # Información de la factura a emitir
   class Invoice
-    attr_accessor :date, :sale_point, :number, :client, :details
+    attr_accessor :date, :sale_point, :number, :client, :details, :supplier
 
     # Atributos para construir:
     #
@@ -113,29 +126,48 @@ module Poseidon
     # + sale_point
     # + number
     # + client: a Poseidon::Client instance
+    # + supplier: a Poseidon::Supplier instance
     #
     def initialize(attrs)
       @date = attrs[:date] || Date.now
       @sale_point = attrs[:sale_point]
       @number = attrs[:number]
       @client = attrs[:client]
+      @supplier = attrs[:supplier]
       @details = []
+      # TODO: debe ocurrir una excepción si no se indica client o supplier
     end
 
     def to_hash
-      { factura: {
+      hash = { 
+        factura: {
           fecha: @date,
           sale_point: @sale_point,
           numero: @number,
-          cliente: @client.to_hash,
           detalles: @details.map { |detail| detail.to_hash } 
         }
       }
+      add_supplier_or_client(hash)
     end
 
     def to_json
       to_hash.to_json
     end
+
+    private
+
+    def add_supplier_or_client(hash)
+      if @client
+        hash[:factura][:cliente] = @client.to_hash 
+      end 
+
+      if @supplier
+        hash[:factura][:proveedor] = @supplier.to_hash 
+      end
+
+      hash
+    end
+
   end
 
   class Client
@@ -155,6 +187,26 @@ module Poseidon
 
     def to_hash
       { razonsocial: @name, cuit_number: @cuit, condicioniva_id: @iva_condition_id }
+    end
+  end
+
+  class Supplier
+    attr_accessor :name, :cuit, :iva_condition_id
+    
+    # Atributos necesario para la construcción:
+    #
+    # + name
+    # + cuit
+    # + iva_condition_id
+    #
+    def initialize(attrs)
+      @name = attrs[:name]
+      @cuit = attrs[:cuit]
+      @iva_condition_id = attrs[:iva_condition_id]
+    end
+
+    def to_hash
+      { razonsocial: @name, cuit: @cuit.to_s, condicioniva_id: @iva_condition_id }
     end
   end
 
